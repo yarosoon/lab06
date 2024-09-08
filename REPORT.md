@@ -1,5 +1,4 @@
-https://coveralls.io/github/yarosoon/lab05?branch=master
-[![Coverage Status](https://coveralls.io/repos/github/yarosoon/lab05/badge.svg?branch=master)](https://coveralls.io/github/yarosoon/lab05?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/yarosoon/lab05/badge.svg?branch=main)](https://coveralls.io/github/yarosoon/lab05?branch=main)
 
 
 ```sh
