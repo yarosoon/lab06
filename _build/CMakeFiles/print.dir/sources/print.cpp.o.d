@@ -1,5 +1,5 @@
 CMakeFiles/print.dir/sources/print.cpp.o: \
- /home/ubuntu/yarosoon/workspace/projects/lab03/sources/print.cpp \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/sources/print.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
