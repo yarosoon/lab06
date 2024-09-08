@@ -1,4 +1,4 @@
-/home/ubuntu/yarosoon/workspace/projects/lab05/_build/CMakeFiles/print.dir
+/home/ubuntu/yarosoon/workspace/projects/lab05/_build/CMakeFiles/banking.dir
 /home/ubuntu/yarosoon/workspace/projects/lab05/_build/CMakeFiles/check.dir
 /home/ubuntu/yarosoon/workspace/projects/lab05/_build/CMakeFiles/test.dir
 /home/ubuntu/yarosoon/workspace/projects/lab05/_build/CMakeFiles/edit_cache.dir

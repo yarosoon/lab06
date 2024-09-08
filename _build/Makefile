@@ -97,7 +97,7 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"gmock\" \"gtest\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"gmock\" \"gtest\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -172,17 +172,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named print
+# Target rules for targets named banking
 
 # Build rule for target.
-print: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 print
-.PHONY : print
+banking: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 banking
+.PHONY : banking
 
 # fast build rule for target.
-print/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/build
-.PHONY : print/fast
+banking/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/build
+.PHONY : banking/fast
 
 #=============================================================================
 # Target rules for targets named check
@@ -249,29 +249,53 @@ gtest_main/fast:
 	$(MAKE) $(MAKESILENT) -f third-party/googletest/googletest/CMakeFiles/gtest_main.dir/build.make third-party/googletest/googletest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
-sources/print.o: sources/print.cpp.o
-.PHONY : sources/print.o
+banking/Account.o: banking/Account.cpp.o
+.PHONY : banking/Account.o
 
 # target to build an object file
-sources/print.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/sources/print.cpp.o
-.PHONY : sources/print.cpp.o
+banking/Account.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Account.cpp.o
+.PHONY : banking/Account.cpp.o
 
-sources/print.i: sources/print.cpp.i
-.PHONY : sources/print.i
+banking/Account.i: banking/Account.cpp.i
+.PHONY : banking/Account.i
 
 # target to preprocess a source file
-sources/print.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/sources/print.cpp.i
-.PHONY : sources/print.cpp.i
+banking/Account.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Account.cpp.i
+.PHONY : banking/Account.cpp.i
 
-sources/print.s: sources/print.cpp.s
-.PHONY : sources/print.s
+banking/Account.s: banking/Account.cpp.s
+.PHONY : banking/Account.s
 
 # target to generate assembly for a file
-sources/print.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/sources/print.cpp.s
-.PHONY : sources/print.cpp.s
+banking/Account.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Account.cpp.s
+.PHONY : banking/Account.cpp.s
+
+banking/Transaction.o: banking/Transaction.cpp.o
+.PHONY : banking/Transaction.o
+
+# target to build an object file
+banking/Transaction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Transaction.cpp.o
+.PHONY : banking/Transaction.cpp.o
+
+banking/Transaction.i: banking/Transaction.cpp.i
+.PHONY : banking/Transaction.i
+
+# target to preprocess a source file
+banking/Transaction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Transaction.cpp.i
+.PHONY : banking/Transaction.cpp.i
+
+banking/Transaction.s: banking/Transaction.cpp.s
+.PHONY : banking/Transaction.s
+
+# target to generate assembly for a file
+banking/Transaction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Transaction.cpp.s
+.PHONY : banking/Transaction.cpp.s
 
 tests/test1.o: tests/test1.cpp.o
 .PHONY : tests/test1.o
@@ -310,15 +334,18 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... banking"
 	@echo "... check"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... print"
-	@echo "... sources/print.o"
-	@echo "... sources/print.i"
-	@echo "... sources/print.s"
+	@echo "... banking/Account.o"
+	@echo "... banking/Account.i"
+	@echo "... banking/Account.s"
+	@echo "... banking/Transaction.o"
+	@echo "... banking/Transaction.i"
+	@echo "... banking/Transaction.s"
 	@echo "... tests/test1.o"
 	@echo "... tests/test1.i"
 	@echo "... tests/test1.s"

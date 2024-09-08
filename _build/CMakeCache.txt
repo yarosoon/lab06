@@ -202,7 +202,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=print
+CMAKE_PROJECT_NAME:STATIC=banking
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=1.9.0
@@ -291,6 +291,18 @@ INSTALL_GTEST:BOOL=ON
 
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python3.10
+
+//Value Computed by CMake
+banking_BINARY_DIR:STATIC=/home/ubuntu/yarosoon/workspace/projects/lab05/_build
+
+//Value Computed by CMake
+banking_IS_TOP_LEVEL:STATIC=ON
+
+//Dependencies for the target
+banking_LIB_DEPENDS:STATIC=general;gcov;
+
+//Value Computed by CMake
+banking_SOURCE_DIR:STATIC=/home/ubuntu/yarosoon/workspace/projects/lab05
 
 //Value Computed by CMake
 gmock_BINARY_DIR:STATIC=/home/ubuntu/yarosoon/workspace/projects/lab05/_build/third-party/googletest/googlemock
