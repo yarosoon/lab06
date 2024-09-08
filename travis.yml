@@ -1,0 +1,20 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+
+# Установите Google Test и другие зависимости
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y libgtest-dev
+  - sudo apt-get install -y cmake
+  - cd /usr/src/gtest && sudo cmake . && sudo make && sudo cp *.a /usr/lib
+
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - make test
+  after_success:
+  - coveralls -r . -i _build/tests/ -e _build/
