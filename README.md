@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/yarosoon/lab05/badge.svg?branch=main)](https://coveralls.io/github/yarosoon/lab05?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/yarosoon/lab05/badge.svg?branch=master)](https://coveralls.io/github/yarosoon/lab05?branch=master)
 ```sh
 $ export GITHUB_USERNAME=<имя_пользователя>
 $ alias gsed=sed # for *-nix system
