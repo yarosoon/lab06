@@ -1,0 +1,29 @@
+{
+  "name": "lab05",
+  "version": "1.0.0",
+  "description": "Homework",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "banking"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yarosoon/lab05.git"
+  },
+  "keywords": [
+    "lab05"
+  ],
+  "author": "yarosoon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yarosoon/lab05/issues"
+  },
+  "homepage": "https://github.com/yarosoon/lab05#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
