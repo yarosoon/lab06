@@ -1,6 +1,8 @@
 CMakeFiles/check.dir/tests/test1.cpp.o: \
  /home/ubuntu/yarosoon/workspace/projects/lab05/tests/test1.cpp \
  /usr/include/stdc-predef.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/banking/Account.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/banking/Transaction.h \
  /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googletest/include/gtest/gtest.h \
  /usr/include/c++/11/cstddef \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -262,7 +264,40 @@ CMakeFiles/check.dir/tests/test1.cpp.o: \
  /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googletest/include/gtest/gtest-typed-test.h \
  /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googletest/include/gtest/gtest_pred_impl.h \
  /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googletest/include/gtest/gtest_prod.h \
- /usr/include/c++/11/fstream \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-actions.h \
+ /usr/include/c++/11/algorithm /usr/include/c++/11/bits/stl_algo.h \
+ /usr/include/c++/11/bits/algorithmfwd.h \
+ /usr/include/c++/11/bits/stl_heap.h \
+ /usr/include/c++/11/bits/uniform_int_dist.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/internal/gmock-internal-utils.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/internal/gmock-port.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/internal/custom/gmock-port.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/internal/gmock-pp.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-cardinalities.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
+ /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+ /usr/include/linux/limits.h \
+ /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-function-mocker.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-spec-builders.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-matchers.h \
+ /usr/include/c++/11/cmath /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/internal/custom/gmock-matchers.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-more-actions.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/internal/custom/gmock-generated-actions.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-more-matchers.h \
+ /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googlemock/include/gmock/gmock-nice-strict.h

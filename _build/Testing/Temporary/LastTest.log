@@ -1,29 +1,50 @@
-Start testing: Sep 09 02:30 MSK
+Start testing: Sep 09 16:35 MSK
 ----------------------------------------------------------
 1/1 Testing: check
 1/1 Test: check
 Command: "/home/ubuntu/yarosoon/workspace/projects/lab05/_build/check"
 Directory: /home/ubuntu/yarosoon/workspace/projects/lab05/_build
-"check" start time: Sep 09 02:30 MSK
+"check" start time: Sep 09 16:35 MSK
 Output:
 ----------------------------------------------------------
 Running main() from /home/ubuntu/yarosoon/workspace/projects/lab05/third-party/googletest/googletest/src/gtest_main.cc
-[==========] Running 1 test from 1 test suite.
+[==========] Running 4 tests from 2 test suites.
 [----------] Global test environment set-up.
-[----------] 1 test from Print
-[ RUN      ] Print.InFileStream
-[       OK ] Print.InFileStream (0 ms)
-[----------] 1 test from Print (1 ms total)
+[----------] 2 tests from Account
+[ RUN      ] Account.Mock
+[       OK ] Account.Mock (0 ms)
+[ RUN      ] Account.SimpleTest
+[       OK ] Account.SimpleTest (0 ms)
+[----------] 2 tests from Account (0 ms total)
+
+[----------] 2 tests from Transaction
+[ RUN      ] Transaction.Mock
+[       OK ] Transaction.Mock (0 ms)
+[ RUN      ] Transaction.SimpleTest
+1 send to 2 $400
+Balance 1 is 100
+Balance 2 is 300
+2 send to 1 $300
+Balance 2 is 300
+Balance 1 is 100
+2 send to 1 $290
+Balance 2 is 300
+Balance 1 is 100
+2 send to 1 $150
+Balance 2 is 140
+Balance 1 is 250
+[       OK ] Transaction.SimpleTest (0 ms)
+[----------] 2 tests from Transaction (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (1 ms total)
-[  PASSED  ] 1 test.
+[==========] 4 tests from 2 test suites ran. (1 ms total)
+[  PASSED  ] 4 tests.
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"check" end time: Sep 09 02:30 MSK
+"check" end time: Sep 09 16:35 MSK
 "check" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 09 02:30 MSK
+End testing: Sep 09 16:35 MSK
