@@ -1,6 +1,24 @@
-[![Coverage Status](https://coveralls.io/repos/github/yarosoon/lab06/badge.svg?branch=master)](https://coveralls.io/github/yarosoon/lab06?branch=master)
+## Laboratory work VI
+
+Данная лабораторная работа посвещена изучению средств пакетирования на примере **CPack**
+
+```sh
+$ open https://cmake.org/Wiki/CMake:CPackPackageGenerators
+```
+
+## Tasks
+
+- [ ] 1. Создать публичный репозиторий с названием **lab06** на сервисе **GitHub**
+- [ ] 2. Выполнить инструкцию учебного материала
+- [ ] 3. Ознакомиться со ссылками учебного материала
+- [ ] 4. Составить отчет и отправить ссылку личным сообщением в **Slack**
+
+## Tutorial
+
 ```sh
 $ export GITHUB_USERNAME=<имя_пользователя>
+$ export GITHUB_EMAIL=<адрес_почтового_ящика>
+$ alias edit=<nano|vi|vim|subl>
 $ alias gsed=sed # for *-nix system
 ```
 
@@ -11,91 +29,115 @@ $ source scripts/activate
 ```
 
 ```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/lab06 projects/lab06
+$ git clone https://github.com/${GITHUB_USERNAME}/lab05 projects/lab06
 $ cd projects/lab06
 $ git remote remove origin
 $ git remote add origin https://github.com/${GITHUB_USERNAME}/lab06
 ```
 
 ```sh
-$ mkdir third-party
-$ git submodule add https://github.com/google/googletest third-party/gtest
-$ cd third-party/gtest && git checkout release-1.8.1 && cd ../..
-$ git add third-party/gtest
-$ git commit -m"added gtest framework"
+$ gsed -i '/project(print)/a\
+set(PRINT_VERSION_STRING "v\${PRINT_VERSION}")
+' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+set(PRINT_VERSION\
+  \${PRINT_VERSION_MAJOR}.\${PRINT_VERSION_MINOR}.\${PRINT_VERSION_PATCH}.\${PRINT_VERSION_TWEAK})
+' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+set(PRINT_VERSION_TWEAK 0)
+' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+set(PRINT_VERSION_PATCH 0)
+' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+set(PRINT_VERSION_MINOR 1)
+' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+set(PRINT_VERSION_MAJOR 0)
+' CMakeLists.txt
+$ git diff
 ```
 
 ```sh
-$ gsed -i '/option(BUILD_EXAMPLES "Build examples" OFF)/a\
-option(BUILD_TESTS "Build tests" OFF)
-' CMakeLists.txt
+$ touch DESCRIPTION && edit DESCRIPTION
+$ touch ChangeLog.md
+$ export DATE="`LANG=en_US date +'%a %b %d %Y'`"
+$ cat > ChangeLog.md <<EOF
+* ${DATE} ${GITHUB_USERNAME} <${GITHUB_EMAIL}> 0.1.0.0
+- Initial RPM release
+EOF
+```
+
+```sh
+$ cat > CPackConfig.cmake <<EOF
+include(InstallRequiredSystemLibraries)
+EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+set(CPACK_PACKAGE_CONTACT ${GITHUB_EMAIL})
+set(CPACK_PACKAGE_VERSION_MAJOR \${PRINT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR \${PRINT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH \${PRINT_VERSION_PATCH})
+set(CPACK_PACKAGE_VERSION_TWEAK \${PRINT_VERSION_TWEAK})
+set(CPACK_PACKAGE_VERSION \${PRINT_VERSION})
+set(CPACK_PACKAGE_DESCRIPTION_FILE \${CMAKE_CURRENT_SOURCE_DIR}/DESCRIPTION)
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "static C++ library for printing")
+EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+
+set(CPACK_RESOURCE_FILE_LICENSE \${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
+set(CPACK_RESOURCE_FILE_README \${CMAKE_CURRENT_SOURCE_DIR}/README.md)
+EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+
+set(CPACK_RPM_PACKAGE_NAME "print-devel")
+set(CPACK_RPM_PACKAGE_LICENSE "MIT")
+set(CPACK_RPM_PACKAGE_GROUP "print")
+set(CPACK_RPM_CHANGELOG_FILE \${CMAKE_CURRENT_SOURCE_DIR}/ChangeLog.md)
+set(CPACK_RPM_PACKAGE_RELEASE 1)
+EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+
+set(CPACK_DEBIAN_PACKAGE_NAME "libprint-dev")
+set(CPACK_DEBIAN_PACKAGE_PREDEPENDS "cmake >= 3.0")
+set(CPACK_DEBIAN_PACKAGE_RELEASE 1)
+EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+
+include(CPack)
+EOF
+```
+
+```sh
 $ cat >> CMakeLists.txt <<EOF
 
-if(BUILD_TESTS)
-  enable_testing()
-  add_subdirectory(third-party/gtest)
-  file(GLOB \${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
-  add_executable(check \${\${PROJECT_NAME}_TEST_SOURCES})
-  target_link_libraries(check \${PROJECT_NAME} gtest_main)
-  add_test(NAME check COMMAND check)
-endif()
+include(CPackConfig.cmake)
 EOF
 ```
 
 ```sh
-$ mkdir tests
-$ cat > tests/test1.cpp <<EOF
-#include <print.hpp>
-
-#include <gtest/gtest.h>
-
-TEST(Print, InFileStream)
-{
-  std::string filepath = "file.txt";
-  std::string text = "hello";
-  std::ofstream out{filepath};
-
-  print(text, out);
-  out.close();
-
-  std::string result;
-  std::ifstream in{filepath};
-  in >> result;
-
-  EXPECT_EQ(result, text);
-}
-EOF
+$ gsed -i 's/lab05/lab06/g' README.md
 ```
 
 ```sh
-$ cmake -H. -B_build -DBUILD_TESTS=ON
-$ cmake --build _build
-$ cmake --build _build --target test
-```
-
-```sh
-$ _build/check
-$ cmake --build _build --target test -- ARGS=--verbose
-```
-
-```sh
-$ gsed -i 's/lab06/lab06/g' README.md
-$ gsed -i 's/\(DCMAKE_INSTALL_PREFIX=_install\)/\1 -DBUILD_TESTS=ON/' .travis.yml
-$ gsed -i '/cmake --build _build --target install/a\
-- cmake --build _build --target test -- ARGS=--verbose
-' .travis.yml
-```
-
-```sh
-$ travis lint
-```
-
-```sh
-$ git add .travis.yml
-$ git add tests
-$ git add -p
-$ git commit -m"added tests"
-$ git push origin master
+$ git add .
+$ git commit -m"added cpack config"
+$ git tag v0.1.0.0
+$ git push origin master --tags
 ```
 
 ```sh
@@ -104,17 +146,29 @@ $ travis enable
 ```
 
 ```sh
+$ cmake -H. -B_build
+$ cmake --build _build
+$ cd _build
+$ cpack -G "TGZ"
+$ cd ..
+```
+
+```sh
+$ cmake -H. -B_build -DCPACK_GENERATOR="TGZ"
+$ cmake --build _build --target package
+```
+
+```sh
 $ mkdir artifacts
-$ sleep 20s && gnome-screenshot --file artifacts/screenshot.png
-# for macOS: $ screencapture -T 20 artifacts/screenshot.png
-# open https://github.com/${GITHUB_USERNAME}/lab06
+$ mv _build/*.tar.gz artifacts
+$ tree artifacts
 ```
 
 ## Report
 
 ```sh
 $ popd
-$ export LAB_NUMBER=05
+$ export LAB_NUMBER=06
 $ git clone https://github.com/tp-labs/lab${LAB_NUMBER} tasks/lab${LAB_NUMBER}
 $ mkdir reports/lab${LAB_NUMBER}
 $ cp tasks/lab${LAB_NUMBER}/README.md reports/lab${LAB_NUMBER}/REPORT.md
@@ -125,119 +179,58 @@ $ gist REPORT.md
 
 ## Homework
 
-### Задание
-1. Создайте `CMakeList.txt` для библиотеки *banking*.
+После того, как вы настроили взаимодействие с системой непрерывной интеграции,</br>
+обеспечив автоматическую сборку и тестирование ваших изменений, стоит задуматься</br>
+о создание пакетов для измениний, которые помечаются тэгами (см. вкладку [releases](https://github.com/tp-labs/lab06/releases)).</br>
+Пакет должен содержать приложение _solver_ из [предыдущего задания](https://github.com/tp-labs/lab03#задание-1)
+Таким образом, каждый новый релиз будет состоять из следующих компонентов:
+- архивы с файлами исходного кода (`.tar.gz`, `.zip`)
+- пакеты с бинарным файлом _solver_ (`.deb`, `.rpm`, `.msi`, `.dmg`)
+
+В качестве подсказки:
 ```sh
-cmake_minimum_required(VERSION 3.4)
+$ cat .travis.yml
+os: osx
+script:
+...
+- cpack -G DragNDrop # dmg
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+$ cat .travis.yml
+os: linux
+script:
+...
+- cpack -G DEB # deb
 
-option(BUILD_TESTS "Build tests" OFF)
+$ cat .travis.yml
+os: linux
+addons:
+  apt:
+    packages:
+    - rpm
+script:
+...
+- cpack -G RPM # rpm
 
-if(BUILD_TESTS)
-  add_compile_options(--coverage)
-endif()
-
-project (banking)
-
-add_library(banking STATIC ${CMAKE_CURRENT_SOURCE_DIR}/banking/Transaction.cpp ${CMAKE_CURRENT_SOURCE_DIR}/banking/Account.cpp)
-target_include_directories(banking PUBLIC
-${CMAKE_CURRENT_SOURCE_DIR}/banking )
-
-target_link_libraries(banking gcov)
-
-if(BUILD_TESTS)
-  enable_testing()
-  add_subdirectory(googletest)
-  file(GLOB BANKING_TEST_SOURCES tests/*.cpp)
-  add_executable(check ${BANKING_TEST_SOURCES})
-  target_link_libraries(check banking gtest_main gmock_main)
-  add_test(NAME check COMMAND check)
-endif()
+$ cat appveyor.yml
+platform:
+- x86
+- x64
+build_script:
+...
+- cpack -G WIX # msi
 ```
-2. Создайте модульные тесты на классы `Transaction` и `Account`.
-# Account_test
-```sh
-#include "Account.h"
 
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
+Для этого нужно добавить ветвление в конфигурационные файлы для **CI** со следующей логикой:</br>
+если **commit** помечен тэгом, то необходимо собрать пакеты (`DEB, RPM, WIX, DragNDrop, ...`) </br>
+и разместить их на сервисе **GitHub**. (см. пример для [Travi CI](https://docs.travis-ci.com/user/deployment/releases))</br>
 
-class AccountMock : public Account {
-public:
-    AccountMock(int id, int balance) : Account(id, balance) {}
-    MOCK_CONST_METHOD0(GetBalance, int());
-    MOCK_METHOD1(ChangeBalance, void(int diff));
-    MOCK_METHOD0(Lock, void());
-    MOCK_METHOD0(Unlock, void());
-};
+## Links
 
-TEST(Account, Mock) {
-    AccountMock acc(1, 666);
-    EXPECT_CALL(acc, GetBalance()).Times(1);
-    EXPECT_CALL(acc, ChangeBalance(testing::_)).Times(2);
-    EXPECT_CALL(acc, Lock()).Times(2);
-    EXPECT_CALL(acc, Unlock()).Times(1);
-    acc.GetBalance();
-    acc.ChangeBalance(100);
-    acc.Lock();
-    acc.ChangeBalance(100);
-    acc.Lock();
-    acc.Unlock();
-}
+- [DMG](https://cmake.org/cmake/help/latest/module/CPackDMG.html)
+- [DEB](https://cmake.org/cmake/help/latest/module/CPackDeb.html)
+- [RPM](https://cmake.org/cmake/help/latest/module/CPackRPM.html)
+- [NSIS](https://cmake.org/cmake/help/latest/module/CPackNSIS.html)
 
-TEST(Account, SimpleTest) {
-    Account acc(1, 666);
-    EXPECT_EQ(acc.id(), 1);
-    EXPECT_EQ(acc.GetBalance(), 666);
-    EXPECT_THROW(acc.ChangeBalance(200), std::runtime_error);
-    EXPECT_NO_THROW(acc.Lock());
-    acc.ChangeBalance(200);
-    EXPECT_EQ(acc.GetBalance(), 866);
-    EXPECT_THROW(acc.Lock(), std::runtime_error);
-    EXPECT_NO_THROW(acc.Unlock());
-}
 ```
-# Transaction_test
-```sh
-#include "Transaction.h"
-#include "Account.h"
-
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
-
-class TransactionMock : public Transaction {
-public:
-    MOCK_METHOD3(Make, bool(Account& from, Account& to, int sum));
-};
-
-TEST(Transaction, Mock) {
-    TransactionMock tr;
-    Account account_1(1, 100);
-    Account account_2(2, 300);
-    EXPECT_CALL(tr, Make(testing::_, testing::_, testing::_))
-        .Times(5);
-    tr.set_fee(200);
-    tr.Make(account_1, account_2, 200);
-    tr.Make(account_2, account_1, 300);
-    tr.Make(account_1, account_1, 0);
-    tr.Make(account_1, account_2, -5);
-    tr.Make(account_2, account_1, 50);
-}
-
-TEST(Transaction, SimpleTest) {
-    Transaction tr;
-    Account account_1(1, 100);
-    Account account_2(2, 300);
-    tr.set_fee(10);
-    EXPECT_EQ(tr.fee(), 10);
-    EXPECT_THROW(tr.Make(account_1, account_2, 40), std::logic_error);
-    EXPECT_THROW(tr.Make(account_1, account_2, -5), std::invalid_argument);
-    EXPECT_THROW(tr.Make(account_1, account_1, 100), std::logic_error);
-    EXPECT_FALSE(tr.Make(account_1, account_2, 400));
-    EXPECT_FALSE(tr.Make(account_2, account_1, 300));
-    EXPECT_FALSE(tr.Make(account_2, account_1, 290));
-    EXPECT_TRUE(tr.Make(account_2, account_1, 150));
-}
+Copyright (c) 2015-2021 The ISC Authors
 ```

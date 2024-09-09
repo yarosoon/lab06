@@ -57,23 +57,33 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ubuntu/yarosoon/workspace/projects/lab05
+CMAKE_SOURCE_DIR = /home/ubuntu/yarosoon/workspace/projects/lab06
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ubuntu/yarosoon/workspace/projects/lab05/_build
+CMAKE_BINARY_DIR = /home/ubuntu/yarosoon/workspace/projects/lab06/_build
 
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
+# Special rule for the target package
+package: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
+	/usr/bin/cpack --config ./CPackConfig.cmake
+.PHONY : package
 
-# Special rule for the target test
-test/fast: test
-.PHONY : test/fast
+# Special rule for the target package
+package/fast: package
+.PHONY : package/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/ubuntu/yarosoon/workspace/projects/lab06/_build/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+.PHONY : package_source/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -97,7 +107,7 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"gmock\" \"gtest\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -142,9 +152,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/yarosoon/workspace/projects/lab05/_build/CMakeFiles /home/ubuntu/yarosoon/workspace/projects/lab05/_build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/yarosoon/workspace/projects/lab06/_build/CMakeFiles /home/ubuntu/yarosoon/workspace/projects/lab06/_build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/yarosoon/workspace/projects/lab05/_build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/yarosoon/workspace/projects/lab06/_build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -172,154 +182,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named banking
+# Target rules for targets named print
 
 # Build rule for target.
-banking: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 banking
-.PHONY : banking
+print: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 print
+.PHONY : print
 
 # fast build rule for target.
-banking/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/build
-.PHONY : banking/fast
+print/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/build
+.PHONY : print/fast
 
-#=============================================================================
-# Target rules for targets named check
-
-# Build rule for target.
-check: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 check
-.PHONY : check
-
-# fast build rule for target.
-check/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/check.dir/build.make CMakeFiles/check.dir/build
-.PHONY : check/fast
-
-#=============================================================================
-# Target rules for targets named gmock
-
-# Build rule for target.
-gmock: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gmock
-.PHONY : gmock
-
-# fast build rule for target.
-gmock/fast:
-	$(MAKE) $(MAKESILENT) -f third-party/googletest/googlemock/CMakeFiles/gmock.dir/build.make third-party/googletest/googlemock/CMakeFiles/gmock.dir/build
-.PHONY : gmock/fast
-
-#=============================================================================
-# Target rules for targets named gmock_main
-
-# Build rule for target.
-gmock_main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gmock_main
-.PHONY : gmock_main
-
-# fast build rule for target.
-gmock_main/fast:
-	$(MAKE) $(MAKESILENT) -f third-party/googletest/googlemock/CMakeFiles/gmock_main.dir/build.make third-party/googletest/googlemock/CMakeFiles/gmock_main.dir/build
-.PHONY : gmock_main/fast
-
-#=============================================================================
-# Target rules for targets named gtest
-
-# Build rule for target.
-gtest: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest
-.PHONY : gtest
-
-# fast build rule for target.
-gtest/fast:
-	$(MAKE) $(MAKESILENT) -f third-party/googletest/googletest/CMakeFiles/gtest.dir/build.make third-party/googletest/googletest/CMakeFiles/gtest.dir/build
-.PHONY : gtest/fast
-
-#=============================================================================
-# Target rules for targets named gtest_main
-
-# Build rule for target.
-gtest_main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest_main
-.PHONY : gtest_main
-
-# fast build rule for target.
-gtest_main/fast:
-	$(MAKE) $(MAKESILENT) -f third-party/googletest/googletest/CMakeFiles/gtest_main.dir/build.make third-party/googletest/googletest/CMakeFiles/gtest_main.dir/build
-.PHONY : gtest_main/fast
-
-banking/Account.o: banking/Account.cpp.o
-.PHONY : banking/Account.o
+sources/print.o: sources/print.cpp.o
+.PHONY : sources/print.o
 
 # target to build an object file
-banking/Account.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Account.cpp.o
-.PHONY : banking/Account.cpp.o
+sources/print.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/sources/print.cpp.o
+.PHONY : sources/print.cpp.o
 
-banking/Account.i: banking/Account.cpp.i
-.PHONY : banking/Account.i
-
-# target to preprocess a source file
-banking/Account.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Account.cpp.i
-.PHONY : banking/Account.cpp.i
-
-banking/Account.s: banking/Account.cpp.s
-.PHONY : banking/Account.s
-
-# target to generate assembly for a file
-banking/Account.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Account.cpp.s
-.PHONY : banking/Account.cpp.s
-
-banking/Transaction.o: banking/Transaction.cpp.o
-.PHONY : banking/Transaction.o
-
-# target to build an object file
-banking/Transaction.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Transaction.cpp.o
-.PHONY : banking/Transaction.cpp.o
-
-banking/Transaction.i: banking/Transaction.cpp.i
-.PHONY : banking/Transaction.i
+sources/print.i: sources/print.cpp.i
+.PHONY : sources/print.i
 
 # target to preprocess a source file
-banking/Transaction.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Transaction.cpp.i
-.PHONY : banking/Transaction.cpp.i
+sources/print.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/sources/print.cpp.i
+.PHONY : sources/print.cpp.i
 
-banking/Transaction.s: banking/Transaction.cpp.s
-.PHONY : banking/Transaction.s
-
-# target to generate assembly for a file
-banking/Transaction.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/banking.dir/build.make CMakeFiles/banking.dir/banking/Transaction.cpp.s
-.PHONY : banking/Transaction.cpp.s
-
-tests/test1.o: tests/test1.cpp.o
-.PHONY : tests/test1.o
-
-# target to build an object file
-tests/test1.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/check.dir/build.make CMakeFiles/check.dir/tests/test1.cpp.o
-.PHONY : tests/test1.cpp.o
-
-tests/test1.i: tests/test1.cpp.i
-.PHONY : tests/test1.i
-
-# target to preprocess a source file
-tests/test1.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/check.dir/build.make CMakeFiles/check.dir/tests/test1.cpp.i
-.PHONY : tests/test1.cpp.i
-
-tests/test1.s: tests/test1.cpp.s
-.PHONY : tests/test1.s
+sources/print.s: sources/print.cpp.s
+.PHONY : sources/print.s
 
 # target to generate assembly for a file
-tests/test1.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/check.dir/build.make CMakeFiles/check.dir/tests/test1.cpp.s
-.PHONY : tests/test1.cpp.s
+sources/print.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/print.dir/build.make CMakeFiles/print.dir/sources/print.cpp.s
+.PHONY : sources/print.cpp.s
 
 # Help Target
 help:
@@ -332,23 +229,13 @@ help:
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... list_install_components"
+	@echo "... package"
+	@echo "... package_source"
 	@echo "... rebuild_cache"
-	@echo "... test"
-	@echo "... banking"
-	@echo "... check"
-	@echo "... gmock"
-	@echo "... gmock_main"
-	@echo "... gtest"
-	@echo "... gtest_main"
-	@echo "... banking/Account.o"
-	@echo "... banking/Account.i"
-	@echo "... banking/Account.s"
-	@echo "... banking/Transaction.o"
-	@echo "... banking/Transaction.i"
-	@echo "... banking/Transaction.s"
-	@echo "... tests/test1.o"
-	@echo "... tests/test1.i"
-	@echo "... tests/test1.s"
+	@echo "... print"
+	@echo "... sources/print.o"
+	@echo "... sources/print.i"
+	@echo "... sources/print.s"
 .PHONY : help
 
 
